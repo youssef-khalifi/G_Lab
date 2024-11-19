@@ -1,14 +1,11 @@
 spring:
   application:
     name: Gateway_Service
+  config:
+    import: optional:configserver:${CONFIG_SERVICE:http://localhost:9999}
 
 server:
   port: 8888
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
+
 rsa:
   public-key: classpath:Keys/publicKey.pem

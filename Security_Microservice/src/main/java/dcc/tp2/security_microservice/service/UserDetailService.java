@@ -1,6 +1,7 @@
 package dcc.tp2.security_microservice.service;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +20,8 @@ import java.util.Map;
 @Service
 public class UserDetailService implements UserDetailsService {
     private RestTemplate restTemplate;
+    @Value("${gateway.service.url}")
+    private String gatewayServiceUrl;
 
     public UserDetailService() {
         this.restTemplate = new RestTemplate();
@@ -37,14 +41,21 @@ public class UserDetailService implements UserDetailsService {
         Map<String, String> user_infos = new HashMap<>();
 
         if (userType.equals("Enseignant")){
-            System.out.println("YES Prof");
-            user_infos = restTemplate.getForObject("http://localhost:8888/ENSEIGNANT-SERVICE/Enseignants/email/"+email,HashMap.class);
-
+            String url = UriComponentsBuilder.fromHttpUrl(gatewayServiceUrl)
+                    .path("/ENSEIGNANT-SERVICE/Enseignants/email/")
+                    .path(email)
+                    .toUriString();
+            user_infos = restTemplate.getForObject(url, HashMap.class);
         }
 
         if (userType.equals("Chercheur")){
 
-            user_infos = restTemplate.getForObject("http://localhost:8888/CHERCHEUR-SERVICE/Chercheurs/email/"+email,HashMap.class);
+            String url = UriComponentsBuilder.fromHttpUrl(gatewayServiceUrl)
+                    .path("/CHERCHEUR-SERVICE/Chercheurs/email/")
+                    .path(email)
+                    .toUriString();
+
+            user_infos = restTemplate.getForObject(url, HashMap.class);
         }
 
 

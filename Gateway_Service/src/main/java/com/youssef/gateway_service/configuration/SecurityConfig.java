@@ -25,9 +25,9 @@ public class SecurityConfig {
             http
                     .csrf(csrf -> csrf.disable())
                     .authorizeExchange(auth -> auth
-                            .pathMatchers("/ENSEIGNANT-SERVICE/Enseignants/email/{id}").permitAll()
+                            .pathMatchers("/ENSEIGNANT-SERVICE/Enseignants/email/{email}").permitAll()
                             .pathMatchers("/ENSEIGNANT-SERVICE/Enseignants/**").hasAuthority("SCOPE_Enseignant")
-                            .pathMatchers("/CHERCHEUR-SERVICE/Chercheurs/email/{id}").permitAll()
+                            .pathMatchers("/CHERCHEUR-SERVICE/Chercheurs/email/{email}").permitAll()
                             .pathMatchers("/CHERCHEUR-SERVICE/Chercheurs/**").hasAuthority("SCOPE_Chercheur")
                             .anyExchange().authenticated()
                     )
