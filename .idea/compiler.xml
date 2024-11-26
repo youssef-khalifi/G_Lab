@@ -9,13 +9,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Discovery-service" />
         <module name="Projet-Service" />
-        <module name="Gateway_Service" />
         <module name="Chercheur-Service" />
         <module name="Config_Service" />
         <module name="Security_Microservice" />
         <module name="Enseignant-Service" />
+        <module name="Gateway-service (2) (org.cn)" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Gateway-Service" target="17" />
+      <module name="Gateway_Service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -23,6 +27,8 @@
       <module name="Config_Service" options="-parameters" />
       <module name="Discovery-service" options="-parameters" />
       <module name="Enseignant-Service" options="-parameters" />
+      <module name="Gateway-Service" options="-parameters" />
+      <module name="Gateway-service (2) (org.cn)" options="-parameters" />
       <module name="Gateway_Service" options="-parameters" />
       <module name="Projet-Service" options="-parameters" />
       <module name="Security_Microservice" options="-parameters" />
